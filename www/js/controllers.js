@@ -1,6 +1,17 @@
-angular.module('starter.controllers', [])
+angular.module('NetPlanningApp')
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+
+    $scope.isLoaded = false;
+
+    // Create the delete modal that we will use later
+    $ionicModal.fromTemplateUrl('templates/delete.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.deleteModal = modal;
+    });
+
+
   // Form data for the login modal
   $scope.loginData = {};
 

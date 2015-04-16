@@ -1,1 +1,17 @@
-/* Empty. Add your own CSS if you like */
+.highlight.ng-enter-stagger {
+    transition-delay: 0.1s ;
+    -webkit-transition-delay: 0.1s ;
+
+}
+.highlight.ng-enter a {
+    background-color: lemonchiffon;
+}
+.highlight.ng-enter {
+    opacity: 0.2 ;
+    padding-left: 30px ;
+    transition: all ease 350ms ;
+}
+.highlight.ng-enter-active {
+    opacity: 1.0 ;
+    padding-left: 0px ;
+}

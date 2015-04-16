@@ -1,0 +1,34 @@
+<ion-modal-view>
+    <ion-header-bar class="bar-stable">
+        <h1 class="title">Cancel lesson</h1>
+        <div class="buttons">
+            <button class="button button-clear" ng-click="deleteModal.hide()">Back</button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <form ng-submit="delete()">
+            <div class="padding">
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        Reason:
+                    </div>
+                    <select>
+                        <option>Sick</option>
+                        <option>Technical problem</option>
+                        <option selected>Personal reason</option>
+                        <option>Holidays</option>
+                    </select>
+                </label>
+            </div>
+            <div class="padding">
+                <p>Kindly explain to us what's happening:</p>
+                <label class="item item-input">
+                    <textarea rows="8" placeholder=""></textarea>
+                </label>
+            </div>
+            <div class="padding">
+                <button class="button button-block button-assertive">Cancel this lesson</button>
+            </div>
+        </form>
+    </ion-content>
+</ion-modal-view>
