@@ -1,9 +1,9 @@
-<ion-view view-title="Next">
+<ion-view view-title="Next lessons">
     <ion-content>
-        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="reload()"></ion-refresher>
         <ion-list can-swipe="true">
-            <ion-item ng-repeat="item in items" ng-class="{ highlight: isLoaded }" href="#/app/playlists/{{playlist.id}}">
-                <img ng-src="{{item.img}}">
+            <ion-item ng-repeat="item in items" ng-class="{ highlight: isLoaded }" class="item-avatar">
+                <img class="rounded" src="http://dummyimage.com/80x80/ffabff/000000.png&text=R">
                 <h2>{{item.name}}</h2>
                 <small>{{item.startDate | date}}</small>
                 <ion-option-button class="button-positive icon ion-email" ng-click="email(item)"></ion-option-button>

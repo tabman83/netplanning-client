@@ -1,0 +1,14 @@
+<ion-view view-title="New lessons">
+    <ion-content>
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="reload()"></ion-refresher>
+        <ion-list can-swipe="true">
+            <ion-item ng-repeat="item in items" ng-class="{ highlight: isLoaded }" class="item-avatar">
+                <img class="rounded" src="http://dummyimage.com/80x80/ffabff/000000.png&text=R">
+                <h2>{{item.name}}</h2>
+                <small>{{item.startDate | date}}</small>
+                <ion-option-button class="button-positive icon ion-email" ng-click="email(item)"></ion-option-button>
+                <ion-option-button class="button-assertive icon ion-trash-a" ng-click="delete(item)"></ion-option-button>
+          </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

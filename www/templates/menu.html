@@ -15,29 +15,33 @@
         </ion-header-bar>
         <ion-content scroll="false">
             <ion-list>
-
                 <ion-item nav-clear menu-close href="#/app/next">
                     <i class="icon ion-asterisk"></i> Next lessons
                 </ion-item>
-                <ion-item nav-clear menu-close href="#/app/full">
+                <ion-item nav-clear menu-close href="#/app/full-schedule">
                     <i class="icon ion-clipboard"></i> Full schedule
                 </ion-item>
                 <ion-item nav-clear menu-close href="#/app/calendar">
                     <i class="icon ion-calendar"></i> Calendar
                 </ion-item>
-                <ion-item nav-clear menu-close href="#/app/updates">
-                    <i class="icon ion-radio-waves"></i> Updates
+                <div class="item item-divider">Updates</div>
+                <ion-item nav-clear menu-close href="#/app/new">
+                    <i class="icon ion-plus"></i> New lessons
+                    <span class="badge badge-energized">1</span>
                 </ion-item>
-
-
-                <ion-item nav-clear menu-close ng-click="login()">
+                <ion-item nav-clear menu-close href="#/app/cancelled">
+                    <i class="icon ion-close"></i> Cancelled lessons
+                    <span class="badge badge-dark">0</span>
+                </ion-item>
+                <!-- <ion-item nav-clear menu-close ng-click="login()">
                     Login
-                </ion-item>
-                <ion-item nav-clear menu-close href="#/app/playlists">
-                    Playlists
-                </ion-item>
+                </ion-item> -->
             </ion-list>
-        </ion-content>
 
+            <p ng-if="lastUpdate" class="last-updated"><i class="icon ion-android-time"></i> Last updated {{lastUpdate | amTimeAgo}}</p>
+        </ion-content>
+        <ion-footer-bar class="logout">
+            <button class="button button-block button-assertive icon ion-locked" ng-click="logout()"> LOGOUT</button>
+        </ion-footer-bar>
     </ion-side-menu>
 </ion-side-menus>
