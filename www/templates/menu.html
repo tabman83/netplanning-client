@@ -38,7 +38,7 @@
                 </ion-item> -->
             </ion-list>
 
-            <p ng-if="lastUpdate" class="last-updated"><i class="icon ion-android-time"></i> Last updated {{lastUpdate | amTimeAgo}}</p>
+            <p ng-if="lastUpdate" class="last-updated"><i class="icon ion-android-time"></i> Last updated <span am-time-ago="lastUpdate"></span></p>
         </ion-content>
         <ion-footer-bar class="logout">
             <button class="button button-block button-assertive icon ion-locked" ng-click="logout()"> LOGOUT</button>
