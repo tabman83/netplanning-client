@@ -24,7 +24,7 @@
                 <ion-item nav-clear menu-close href="#/app/calendar">
                     <i class="icon ion-calendar"></i> Calendar
                 </ion-item>
-                <div class="item item-divider">Updates</div>
+                <div class="item item-divider">Notifications</div>
                 <ion-item nav-clear menu-close href="#/app/new">
                     <i class="icon ion-plus"></i> New lessons
                     <span class="badge badge-energized">1</span>
@@ -40,7 +40,7 @@
 
             <p ng-if="lastUpdate" class="last-updated"><i class="icon ion-android-time"></i> Last updated <span am-time-ago="lastUpdate"></span></p>
         </ion-content>
-        <ion-footer-bar class="logout">
+        <ion-footer-bar class="bar-light logout">
             <button class="button button-block button-assertive icon ion-locked" ng-click="logout()"> LOGOUT</button>
         </ion-footer-bar>
     </ion-side-menu>

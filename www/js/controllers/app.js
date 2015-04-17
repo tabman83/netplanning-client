@@ -1,6 +1,4 @@
-angular.module('NetPlanningApp')
-
-.controller('AppCtrl', function($scope, $rootScope, $ionicModal, $ionicActionSheet, $timeout, $http, $window) {
+angular.module('NetPlanningApp').controller('AppCtrl', function($scope, $rootScope, $ionicModal, $ionicActionSheet, $timeout, $http, $window) {
 
     $scope.isLoaded = false;
     $scope.lastUpdate = undefined;
@@ -50,7 +48,7 @@ angular.module('NetPlanningApp')
                 email: 'tabman83@gmail.com',
                 type: 'recurring'
             }
-            $scope.items.push(item);
+            $scope.items.unshift(item);
             $scope.lastUpdate = Date.now();
         }).finally(function() {
             // Stop the ion-refresher from spinning
@@ -88,5 +86,6 @@ angular.module('NetPlanningApp')
         email: 'tabman83@gmail.com',
         type: 'recurring'
     }];
+    $scope.lastUpdate = Date.now();
 
 });
