@@ -1,7 +1,12 @@
-angular.module('NetPlanningApp').controller('AppCtrl', function($scope, $rootScope, $ionicModal, $ionicActionSheet, $timeout, $http, $window) {
+angular.module('NetPlanningApp').controller('AppCtrl', function($scope, $rootScope, $ionicModal, $ionicActionSheet, $timeout, $http, $window, Api) {
 
     $scope.isLoaded = false;
     $scope.lastUpdate = undefined;
+    $scope.errorDescription = '';
+    $scope.credentials = {
+        username: '',
+        password: ''
+    };
 
     // Create the delete modal that we will use later
     $ionicModal.fromTemplateUrl('templates/delete.html', {
@@ -9,6 +14,22 @@ angular.module('NetPlanningApp').controller('AppCtrl', function($scope, $rootSco
     }).then(function(modal) {
         $scope.deleteModal = modal;
     });
+
+    var loginModal = null;
+    $ionicModal.fromTemplateUrl('templates/login.html', {
+        scope: $scope
+    }).then(function(modal) {
+        loginModal = modal;
+    });
+
+    $scope.doLogin = function() {
+        $scope.errorDescription = '';
+        Api.login($scope.credentials.username, $scope.credentials.password).success(function(result) {
+            console.log("success ",result);
+        }).catch(function(result) {
+            $scope.errorDescription = 'Cannot contact server.';
+        });
+    }
 
     $scope.email = function(item){
         var link = [
@@ -27,12 +48,17 @@ angular.module('NetPlanningApp').controller('AppCtrl', function($scope, $rootSco
     $scope.logout = function() {
         var hideSheet = $ionicActionSheet.show({
             titleText: 'Do you want to sign out ?',
-            destructiveText: 'Sign out',
+            destructiveText: 'Log out',
             cancelText: 'Cancel',
             cancel: function() {
                 // add cancel code..
             },
             destructiveButtonClicked: function() {
+                // log the user out then show login
+                hideSheet();
+                $scope.credentials.username = '';
+                $scope.credentials.password = '';
+                loginModal.show();
             }
         });
     }
