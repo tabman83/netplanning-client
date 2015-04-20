@@ -14,11 +14,8 @@
 
 	angular.module('NetPlanningApp').factory('AuthInterceptor', function($window){
 		var secret = 'sVkJsK41#>P_GN?:y)]FPL~r?MV3`0x-!N{4J.X4`Xu87M-<.T:+??;el@yKU_73';
-		var authToken = $window.localStorage.getItem('authToken');
 		var request = function request(config) {
-			if(authToken) {
-				config.headers['Authorization'] = 'Bearer '+authToken;
-			}
+			config.headers['Authorization'] = 'Bearer '+$window.localStorage.getItem('authToken');
 		    return config;
 		}
 
@@ -34,7 +31,7 @@
 
 	angular.module('NetPlanningApp').provider('Api', function() {
 
-		this.$get = function($http, $log, $window) {
+		this.$get = function($http, $log, $q, $window) {
 
 			function Api() {
 				this.baseUrl = 'http://netplanning.thenino.net:50000/v1';
@@ -47,6 +44,13 @@
 				}).success(function(result) {
 					$window.localStorage.setItem('authToken', result.authToken);
 				});
+			}
+
+			Api.prototype.logout = function () {
+				var deferred = $q.defer();
+				$window.localStorage.removeItem('authToken');
+				deferred.resolve(true);
+				return deferred.promise;
 			}
 
 			Api.prototype.getLessons = function() {
