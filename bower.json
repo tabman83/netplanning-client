@@ -4,10 +4,8 @@
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.0.0-rc.3",
     "moment": "~2.10.2",
-    "angular-moment": "~0.10.0"
-  },
-  "dependencies": {
-    "angular-md5": "~0.1.7",
+    "angular-moment": "~0.10.0",
     "cryptojslib": "~3.1.2"
-  }
+  },
+  "dependencies": {}
 }
