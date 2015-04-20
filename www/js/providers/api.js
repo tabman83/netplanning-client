@@ -3,9 +3,7 @@
 	angular.module('NetPlanningApp').factory('SignInterceptor', function(md5) {
 		var secret = 'sVkJsK41#>P_GN?:y)]FPL~r?MV3`0x-!N{4J.X4`Xu87M-<.T:+??;el@yKU_73';
 		var request = function request(config) {
-			if(config.data) {
-		        config.headers['Signature'] = CryptoJS.HmacMD5(JSON.stringify(config.data), secret);
-			}
+	        config.headers['Signature'] = CryptoJS.HmacMD5(JSON.stringify(config.data || {}), secret);
 		    return config;
 		}
 
@@ -16,8 +14,11 @@
 
 	angular.module('NetPlanningApp').factory('AuthInterceptor', function($window){
 		var secret = 'sVkJsK41#>P_GN?:y)]FPL~r?MV3`0x-!N{4J.X4`Xu87M-<.T:+??;el@yKU_73';
+		var authToken = $window.localStorage.getItem('authToken');
 		var request = function request(config) {
-			config.headers['authorization'] = $window.localStorage.getItem('authToken');
+			if(authToken) {
+				config.headers['Authorization'] = 'Bearer '+authToken;
+			}
 		    return config;
 		}
 
@@ -37,17 +38,19 @@
 
 			function Api() {
 				this.baseUrl = 'http://netplanning.thenino.net:50000/v1';
-				//this.sid = localStorageService.get('sid');
 			}
 
 			Api.prototype.login = function (username, password) {
-				//var hash = md5.createHash(params);
 				return $http.post(this.baseUrl+'/login', {
 					username: username,
 					password: password
 				}).success(function(result) {
 					$window.localStorage.setItem('authToken', result.authToken);
 				});
+			}
+
+			Api.prototype.getLessons = function() {
+				return $http.get(this.baseUrl+'/lessons');
 			}
 
 			return new Api();

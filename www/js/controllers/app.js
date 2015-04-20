@@ -25,9 +25,14 @@ angular.module('NetPlanningApp').controller('AppCtrl', function($scope, $rootSco
     $scope.doLogin = function() {
         $scope.errorDescription = '';
         Api.login($scope.credentials.username, $scope.credentials.password).success(function(result) {
-            console.log("success ",result);
+            $scope.loadData();
+            loginModal.hide();
         }).catch(function(result) {
-            $scope.errorDescription = 'Cannot contact server.';
+            if(result.data) {
+                $scope.errorDescription = result.data.message;
+            } else {
+                $scope.errorDescription = 'Cannot contact server.';
+            }
         });
     }
 
@@ -63,8 +68,9 @@ angular.module('NetPlanningApp').controller('AppCtrl', function($scope, $rootSco
         });
     }
 
-    $scope.reload = function() {
+    $scope.loadData = function() {
         $scope.isLoaded = true;
+        /*
         $http.get('http://api.randomuser.me/').success(function(data) {
             var item = {
                 id: Math.floor(Math.random() * (9000 - 5)) + 5,
@@ -79,39 +85,28 @@ angular.module('NetPlanningApp').controller('AppCtrl', function($scope, $rootSco
         }).finally(function() {
             // Stop the ion-refresher from spinning
             $scope.$broadcast('scroll.refreshComplete');
-       });
+       });*/
+       Api.getLessons().success(function(result) {
+           console.log(result);
+           $scope.items = result.lessons;
+           $scope.lastUpdate = result.lastCheck;
+       }).catch(function(result) {
+           console.log(result);
+           if(result.status === 401) {
+               loginModal.show();
+               return;
+           }
+           if(result.status === 0) {
+               // no internet connection
+               return;
+           }
+           // server error
+       }).finally(function() {
+           // Stop the ion-refresher from spinning
+           $scope.$broadcast('scroll.refreshComplete');
+      });
     };
 
-
-    $scope.items = [{
-        id: 1,
-        name: 'Samira Sedgwick',
-        startDate: new Date(),
-        endDate: new Date(),
-        email: 'tabman83@gmail.com',
-        type: 'recurring'
-    }, {
-        id: 2,
-        name: 'Ronald Mcmickle',
-        startDate: new Date(),
-        endDate: new Date(),
-        email: 'tabman83@gmail.com',
-        type: 'recurring'
-    }, {
-        id: 3,
-        name: 'Tiffani Tew',
-        startDate: new Date(),
-        endDate: new Date(),
-        email: 'tabman83@gmail.com',
-        type: 'recurring'
-    }, {
-        id: 4,
-        name: 'Lilliam Larimore',
-        startDate: new Date(),
-        endDate: new Date(),
-        email: 'tabman83@gmail.com',
-        type: 'recurring'
-    }];
-    $scope.lastUpdate = Date.now();
+    $scope.loadData();
 
 });
