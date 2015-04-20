@@ -1,6 +1,6 @@
 ;(function(angular, undefined) {
 
-	angular.module('NetPlanningApp').factory('SignInterceptor', function(md5) {
+	angular.module('NetPlanningApp').factory('SignInterceptor', function() {
 		var secret = 'sVkJsK41#>P_GN?:y)]FPL~r?MV3`0x-!N{4J.X4`Xu87M-<.T:+??;el@yKU_73';
 		var request = function request(config) {
 	        config.headers['Signature'] = CryptoJS.HmacMD5(JSON.stringify(config.data || {}), secret);

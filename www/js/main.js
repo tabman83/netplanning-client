@@ -1,4 +1,4 @@
-angular.module('NetPlanningApp', ['ionic', 'angularMoment', 'angular-md5']).run(function($ionicPlatform) {
+angular.module('NetPlanningApp', ['ionic', 'angularMoment']).run(function($ionicPlatform) {
 
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
