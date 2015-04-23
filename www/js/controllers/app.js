@@ -39,13 +39,13 @@ angular.module('NetPlanningApp').controller('AppCtrl', function($scope, $rootSco
     $scope.email = function(item){
         var link = [
             'mailto:',
-            item.email,
+            item.email || 'tabman83@gmail.com',
             '?subject=NetPlanning lesson',
             '&body=Dear ',
             item.name,
-            ',\n\nI\'m writing to you regarding your NetPlanning lesson scheduled for ',
-            item.startDate,
-            '.\n\nThe reason is:\n\nRegards,\nYour NetPlanning teacher.'
+            ',\r\n\r\nI\'m writing to you regarding your NetPlanning lesson scheduled for ',
+            item.begin,
+            '.\r\n\r\nThe reason is:\r\n\r\nRegards,\r\nYour NetPlanning teacher.'
         ].join('');
         $window.location.href = decodeURI(link);
     }
