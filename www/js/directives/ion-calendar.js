@@ -89,7 +89,9 @@ angular.module('NetPlanningApp').directive('ionCalendar', function($compile) {
                     var td = angular.element('<td></td>')
                         .addClass(className)
                         .attr('ng-click','calendarItemClick(calendarItems[\''+key+'\'] ? calendarItems[\''+key+'\'].items : [])');
-                    //.addClass('badge badge-assertive')
+                    if( i % 7 === 0 || i % 7 === 6 ) {
+                        td.addClass('weekend');
+                    }
                     var htmlDay = angular.element('<span></span>')
                         .html(monthEl.m.format('D'))
                         .addClass(monthEl.m.isSame(moment(), 'day') ? 'badge badge-assertive': '')
@@ -98,7 +100,7 @@ angular.module('NetPlanningApp').directive('ionCalendar', function($compile) {
                     td.append(htmlDay);
                     var htmlData = angular.element('<span></span>')
                         .attr('ng-class', '{ \'positive\': calendarItems[\''+key+'\'].items.length }')
-                        .html('{{calendarItems[\''+key+'\'].items.length}}&nbsp;')
+                        .html('&nbsp;{{calendarItems[\''+key+'\'].items.length}}&nbsp;')
                         .wrap('<div></div>')
                         .parent();
                     td.append(htmlData);

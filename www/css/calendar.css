@@ -1,6 +1,7 @@
 .calendar table td {
     border-bottom: solid 1px #d3d3d3;
     width: 14.28571428571429%;
+    font-size: 1.4em;
 }
 
 .calendar .next-month,
@@ -8,7 +9,7 @@
     opacity: 0;
 }
 .calendar table.month td {
-    padding: 5px 0px 6px 0px;
+    padding: 5px 0px 12px 0px;
 }
 .calendar table.month td.past-month {
     border-bottom: none;
@@ -24,8 +25,19 @@
     top: 66px;
 }
 .calendar table.content td {
-    padding: 8px 0px 20px 0px;
+    padding: 4px 0px 8px 0px;
 }
+.calendar table.content td.weekend div:first-child span{
+    color: #CCCCCC;
+}
+.calendar table.content td div:first-child span{
+    padding: 8px 8px 8px 8px;
+    display: inline-block;
+}
+.calendar table.content td div:last-child span{
+    font-weight: bold;
+}
+
 .calendar table.content tr:last-child td {
     border-bottom: none;
 }
@@ -33,5 +45,7 @@
     font-size: 0.65em;
 }
 .calendar table.content td .badge {
-
+    font-size: inherit;
+    border-radius: 50%;
+    line-height: inherit;
 }
