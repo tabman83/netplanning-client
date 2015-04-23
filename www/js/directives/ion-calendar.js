@@ -38,7 +38,6 @@ angular.module('NetPlanningApp').directive('ionCalendar', function($compile) {
 
                 var monthObj = [];
                 var today = startDate.clone().add(g,'month');
-                console.log(today.format());
                 var startOfMonth = today.clone().startOf('month');
                 var endOfMonth = today.clone().endOf('month');
 
