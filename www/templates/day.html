@@ -1,0 +1,19 @@
+<ion-modal-view>
+    <ion-header-bar class="bar-stable">
+        <h1 class="title">{{details[0].begin | amDateFormat: 'dddd D MMMM' }}</h1>
+        <div class="buttons">
+            <button class="button button-clear" ng-click="modal.hide()">Back</button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <ion-list>
+            <ion-item ng-repeat="item in details" class="item-avatar">
+                <img class="rounded" src="http://dummyimage.com/80x80/ffabff/000000.png&text=R">
+                <h2>{{item.name}}</h2>
+                <small>{{item.begin | amDateFormat: 'h:mm'}}</small>
+                <ion-option-button class="button-positive icon ion-email" ng-click="email(item)"></ion-option-button>
+                <ion-option-button class="button-assertive icon ion-trash-a" ng-click="delete(item)"></ion-option-button>
+          </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-modal-view>
