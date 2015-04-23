@@ -100,7 +100,7 @@ angular.module('NetPlanningApp').directive('ionCalendar', function($compile) {
                     td.append(htmlDay);
                     var htmlData = angular.element('<span></span>')
                         .attr('ng-class', '{ \'positive\': calendarItems[\''+key+'\'].items.length }')
-                        .html('&nbsp;{{calendarItems[\''+key+'\'].items.length}}&nbsp;')
+                        .html('&nbsp;{{calendarItems[\''+key+'\'] ? calendarItems[\''+key+'\'].items.length : \'\'}}&nbsp;')
                         .wrap('<div></div>')
                         .parent();
                     td.append(htmlData);

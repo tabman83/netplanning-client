@@ -1,7 +1,7 @@
 .calendar table td {
     border-bottom: solid 1px #d3d3d3;
     width: 14.28571428571429%;
-    font-size: 1.4em;
+    font-size: 1.3em;
 }
 
 .calendar .next-month,
@@ -17,6 +17,7 @@
 .calendar table.header {
     position: absolute;
     top: 44px;
+    font-size: 0.7em;
 }
 .calendar table td {
     text-align: center;
