@@ -32,75 +32,81 @@ angular.module('NetPlanningApp').directive('ionCalendar', function($compile) {
             root.append(content);
             $html.append(root);
 
-            var monthObj = [];
+            var startDate = moment();
 
-            var today = moment();
-            var startOfMonth = today.clone().startOf('month');
-            var endOfMonth = today.clone().endOf('month');
+            for( var g=0; g<3; g++) {
 
-            for( var day = startOfMonth.clone().subtract(startOfMonth.day(), 'day'); day.isBefore(startOfMonth, 'day'); day.add(1,'day') ) {
-                monthObj.push({
-                    type: 'past',
-                    m: day.clone()
-                });
-            }
-            for( var day = startOfMonth.clone(); day.isBefore(endOfMonth, 'day') || day.isSame(endOfMonth, 'day'); day.add(1,'day') ) {
-                monthObj.push({
-                    type: 'current',
-                    m: day.clone()
-                });
-            }
-            for( var day = endOfMonth.clone().add(1,'day'); day.isBefore( endOfMonth.clone().subtract(1, 'day').add(endOfMonth.day(), 'day') ); day.add(1,'day') ) {
-                monthObj.push({
-                    type: 'next',
-                    m: day.clone()
-                });
-            }
+                var monthObj = [];
+                var today = startDate.clone().add(g,'month');
+                console.log(today.format());
+                var startOfMonth = today.clone().startOf('month');
+                var endOfMonth = today.clone().endOf('month');
 
-            var table = angular.element('<table></table>').attr('width', '100%').addClass('month')
-            content.append(table);
-            tr = angular.element('<tr></tr>');
-            table.append(tr);
-            for( var i=0; i<7; i++ ) {
-                var monthEl = monthObj[i];
-                var className = monthEl.type+'-month';
-                var td = angular.element('<td></td>').addClass(className);
-                if(today.startOf('month').day() === i) {
-                    td.addClass('assertive').html(today.format('MMM').toUpperCase());
+                for( var day = startOfMonth.clone().subtract(startOfMonth.day(), 'day'); day.isBefore(startOfMonth, 'day'); day.add(1,'day') ) {
+                    monthObj.push({
+                        type: 'past',
+                        m: day.clone()
+                    });
                 }
-                tr.append(td);
-            }
-
-
-            var table = angular.element('<table></table>').attr('width', '100%').addClass('content')
-            content.append(table);
-            for( var i=0; i<monthObj.length; i++) {
-                var monthEl = monthObj[i];
-                var key = monthEl.m.format('YYYY-MM-DD');
-                var tr;
-                if( i % 7 === 0 ) {
-                    tr = angular.element('<tr></tr>');
-                    table.append(tr);
+                for( var day = startOfMonth.clone(); day.isBefore(endOfMonth, 'day') || day.isSame(endOfMonth, 'day'); day.add(1,'day') ) {
+                    monthObj.push({
+                        type: 'current',
+                        m: day.clone()
+                    });
                 }
-                var className = monthEl.type+'-month';
-                var td = angular.element('<td></td>')
-                    .addClass(className)
-                    .attr('ng-click','calendarItemClick(calendarItems[\''+key+'\'] ? calendarItems[\''+key+'\'].items : [])');
-                //.addClass('badge badge-assertive')
-                var htmlDay = angular.element('<span></span>')
-                    .html(monthEl.m.format('D'))
-                    .addClass(monthEl.m.isSame(moment(), 'day') ? 'badge badge-assertive': '')
-                    .wrap('<div></div>')
-                    .parent();
-                td.append(htmlDay);
-                var htmlData = angular.element('<span></span>')
-                    .attr('ng-class', '{ \'positive\': calendarItems[\''+key+'\'].items.length }')
-                    .html('{{calendarItems[\''+key+'\'].items.length}}')
-                    .wrap('<div></div>')
-                    .parent();
-                td.append(htmlData);
-                tr.append(td);
+                for( var day = endOfMonth.clone().add(1,'day'); day.isBefore( endOfMonth.clone().subtract(1, 'day').add(endOfMonth.day(), 'day') ); day.add(1,'day') ) {
+                    monthObj.push({
+                        type: 'next',
+                        m: day.clone()
+                    });
+                }
+
+                var table = angular.element('<table></table>').attr('width', '100%').addClass('month')
+                content.append(table);
+                tr = angular.element('<tr></tr>');
+                table.append(tr);
+                for( var i=0; i<7; i++ ) {
+                    var monthEl = monthObj[i];
+                    var className = monthEl.type+'-month';
+                    var td = angular.element('<td></td>').addClass(className);
+                    if(today.startOf('month').day() === i) {
+                        td.addClass('assertive').html(today.format('MMM').toUpperCase());
+                    }
+                    tr.append(td);
+                }
+
+
+                var table = angular.element('<table></table>').attr('width', '100%').addClass('content')
+                content.append(table);
+                for( var i=0; i<monthObj.length; i++) {
+                    var monthEl = monthObj[i];
+                    var key = monthEl.m.format('YYYY-MM-DD');
+                    var tr;
+                    if( i % 7 === 0 ) {
+                        tr = angular.element('<tr></tr>');
+                        table.append(tr);
+                    }
+                    var className = monthEl.type+'-month';
+                    var td = angular.element('<td></td>')
+                        .addClass(className)
+                        .attr('ng-click','calendarItemClick(calendarItems[\''+key+'\'] ? calendarItems[\''+key+'\'].items : [])');
+                    //.addClass('badge badge-assertive')
+                    var htmlDay = angular.element('<span></span>')
+                        .html(monthEl.m.format('D'))
+                        .addClass(monthEl.m.isSame(moment(), 'day') ? 'badge badge-assertive': '')
+                        .wrap('<div></div>')
+                        .parent();
+                    td.append(htmlDay);
+                    var htmlData = angular.element('<span></span>')
+                        .attr('ng-class', '{ \'positive\': calendarItems[\''+key+'\'].items.length }')
+                        .html('{{calendarItems[\''+key+'\'].items.length}}&nbsp;')
+                        .wrap('<div></div>')
+                        .parent();
+                    td.append(htmlData);
+                    tr.append(td);
+                }
             }
+
             return function($scope, $element, $attrs) {
                 $compile($element.contents())($scope);
             };

@@ -5,7 +5,7 @@
 
 .calendar .next-month,
 .calendar .past-month {
-    opacity: 0.2;
+    opacity: 0;
 }
 .calendar table.month td {
     padding: 5px 0px 6px 0px;
@@ -25,6 +25,9 @@
 }
 .calendar table.content td {
     padding: 8px 0px 20px 0px;
+}
+.calendar table.content tr:last-child td {
+    border-bottom: none;
 }
 .calendar table.content td div:last-child {
     font-size: 0.65em;
