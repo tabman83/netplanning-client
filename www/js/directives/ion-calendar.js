@@ -20,7 +20,7 @@ angular.module('NetPlanningApp').directive('ionCalendar', function($compile) {
         restrict: 'E',
         replace: true,
         scope: {
-            items: '='
+            calendarItems: '=items'
         },
         compile: function($html, $attrs) {
 
@@ -75,6 +75,7 @@ angular.module('NetPlanningApp').directive('ionCalendar', function($compile) {
             content.append(table);
             for( var i=0; i<monthObj.length; i++) {
                 var monthEl = monthObj[i];
+                var key = monthEl.m.format('YYYY-MM-DD');
                 var tr;
                 if( i % 7 === 0 ) {
                     tr = angular.element('<tr></tr>');
@@ -90,14 +91,14 @@ angular.module('NetPlanningApp').directive('ionCalendar', function($compile) {
                     .parent();
                 td.append(htmlDay);
                 var htmlData = angular.element('<span></span>')
-                    .attr('ng-class', '{ \'positive\': items.length }')
-                    .html('{{items.length}}')
+                    .attr('ng-class', '{ \'positive\': calendarItems[\''+key+'\'].items.length }')
+                    .html('{{calendarItems[\''+key+'\'].items.length}}')
                     .wrap('<div></div>')
                     .parent();
                 td.append(htmlData);
                 tr.append(td);
             }
-            return function($scope, $element) {
+            return function($scope, $element, $attrs) {
                 $compile($element.contents())($scope);
             };
         }

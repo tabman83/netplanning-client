@@ -30,11 +30,7 @@ angular.module('NetPlanningApp').filter('groupByDay', function() {
 
     return memoize(function(input) {
         if( angular.isArray(input) ) {
-
-            var g = input.reduce( groupByDay, {} );
-            console.log(g);
-            return g;
-
+            return input.reduce( groupByDay, {} );
         } else {
             return [];
         }
