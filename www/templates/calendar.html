@@ -1,14 +1,3 @@
 <ion-view view-title="Calendar">
-    <ion-content>
-        <ion-refresher pulling-text="Pull to refresh..." on-refresh="loadData()"></ion-refresher>
-        <ion-list can-swipe="true">
-            <ion-item ng-repeat="item in items" ng-class="{ highlight: isLoaded }" class=""><!--item-icon-left-->
-                <!--<i class="icon ion-mic-a"></i>-->
-                {{item.name}}
-                <span class="item-note">{{item.begin | amCalendar}}</span>
-                <ion-option-button class="button-positive icon ion-email" ng-click="email(item)"></ion-option-button>
-                <ion-option-button class="button-assertive icon ion-trash-a" ng-click="delete(item)"></ion-option-button>
-          </ion-item>
-        </ion-list>
-    </ion-content>
+    <ion-calendar items="items"><ion-calendar>
 </ion-view>
