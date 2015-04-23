@@ -1,4 +1,1 @@
-angular.module('NetPlanningApp').controller('CalendarCtrl', function() {
-
-
-});
+angular.module('NetPlanningApp').controller('CalendarCtrl', function() { });

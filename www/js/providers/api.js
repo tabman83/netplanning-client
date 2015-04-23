@@ -13,7 +13,6 @@
 	})
 
 	angular.module('NetPlanningApp').factory('AuthInterceptor', function($window){
-		var secret = 'sVkJsK41#>P_GN?:y)]FPL~r?MV3`0x-!N{4J.X4`Xu87M-<.T:+??;el@yKU_73';
 		var request = function request(config) {
 			config.headers['Authorization'] = 'Bearer '+$window.localStorage.getItem('authToken');
 		    return config;
@@ -22,7 +21,7 @@
 		return {
 			request: request
 		}
-	})
+	});
 
 	angular.module('NetPlanningApp').config(['$httpProvider', function($httpProvider) {
     	$httpProvider.interceptors.push('SignInterceptor');

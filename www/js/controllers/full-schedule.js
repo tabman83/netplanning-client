@@ -1,4 +1,1 @@
-angular.module('NetPlanningApp').controller('FullScheduleCtrl', function() {
-
-
-});
+angular.module('NetPlanningApp').controller('FullScheduleCtrl', function() {});

@@ -1,4 +1,1 @@
-angular.module('NetPlanningApp').controller('NewCtrl', function() {
-
-
-});
+angular.module('NetPlanningApp').controller('NewCtrl', function() { });

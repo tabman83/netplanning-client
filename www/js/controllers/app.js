@@ -36,6 +36,11 @@ angular.module('NetPlanningApp').controller('AppCtrl', function($scope, $rootSco
         });
     }
 
+    $scope.delete = function(item) {
+		console.log(item);
+		$scope.deleteModal.show();
+	}
+
     $scope.email = function(item){
         var link = [
             'mailto:',
@@ -44,10 +49,10 @@ angular.module('NetPlanningApp').controller('AppCtrl', function($scope, $rootSco
             '&body=Dear ',
             item.name,
             ',\r\n\r\nI\'m writing to you regarding your NetPlanning lesson scheduled for ',
-            item.begin,
+            moment(item.begin).format('LLLL'),
             '.\r\n\r\nThe reason is:\r\n\r\nRegards,\r\nYour NetPlanning teacher.'
         ].join('');
-        $window.location.href = decodeURI(link);
+        $window.location.href = encodeURI(link);
     }
 
     $scope.logout = function() {
@@ -60,15 +65,13 @@ angular.module('NetPlanningApp').controller('AppCtrl', function($scope, $rootSco
             },
             destructiveButtonClicked: function() {
                 // log the user out then show login
-                var a = hideSheet();
-                console.log(a);
-                Api.logout().then(function() {
-                    $scope.items = [];
-                    $scope.lastUpdate = null;
-                    $scope.credentials.username = '';
-                    $scope.credentials.password = '';
-                    loginModal.show();
-                });
+                hideSheet();
+                Api.logout();
+                $scope.items = [];
+                $scope.lastUpdate = null;
+                $scope.credentials.username = '';
+                $scope.credentials.password = '';
+                loginModal.show();
             }
         });
     }
@@ -77,7 +80,7 @@ angular.module('NetPlanningApp').controller('AppCtrl', function($scope, $rootSco
         if(showLoading) {
             $ionicLoading.show();
         }
-        $scope.isLoaded = true;
+        //$scope.isLoaded = true;
 
         Api.getLessons().success(function(result) {
             $scope.items = result.lessons;
