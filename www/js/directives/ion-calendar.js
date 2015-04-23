@@ -20,7 +20,8 @@ angular.module('NetPlanningApp').directive('ionCalendar', function($compile) {
         restrict: 'E',
         replace: true,
         scope: {
-            calendarItems: '=items'
+            calendarItems: '=items',
+            calendarItemClick: '=click',
         },
         compile: function($html, $attrs) {
 
@@ -82,7 +83,9 @@ angular.module('NetPlanningApp').directive('ionCalendar', function($compile) {
                     table.append(tr);
                 }
                 var className = monthEl.type+'-month';
-                var td = angular.element('<td></td>').addClass(className);
+                var td = angular.element('<td></td>')
+                    .addClass(className)
+                    .attr('ng-click','calendarItemClick(calendarItems[\''+key+'\'] ? calendarItems[\''+key+'\'].items : [])');
                 //.addClass('badge badge-assertive')
                 var htmlDay = angular.element('<span></span>')
                     .html(monthEl.m.format('D'))
