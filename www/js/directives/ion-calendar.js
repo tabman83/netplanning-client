@@ -1,10 +1,14 @@
 angular.module('NetPlanningApp').directive('ionCalendar', function($compile) {
 
     function appendHeader(html) {
-        var header = angular.element('<table></table>').attr('width', '100%').addClass('header').addClass('stable-bg');
+
+        var header = angular.element('<ion-header-bar></<ion-header-bar>').addClass('bar-subheader');
         html.append(header);
+
+        var table = angular.element('<table></table>').attr('width', '100%').addClass('header').addClass('stable-bg');
+        header.append(table);
         var tr = angular.element('<tr></tr>');
-        header.append(tr);
+        table.append(tr);
         for( var i=0; i<7; i++ ) {
             var label = moment().day(i).format('dd');
             var td = angular.element('<td></td>').html(label);
@@ -28,7 +32,7 @@ angular.module('NetPlanningApp').directive('ionCalendar', function($compile) {
             $html.empty();
             var root = angular.element('<div></div>').addClass('calendar');
             appendHeader(root);
-            var content = angular.element('<ion-content></ion-content>');
+            var content = angular.element('<ion-content></ion-content>').addClass('has-subheader');
             root.append(content);
             $html.append(root);
 

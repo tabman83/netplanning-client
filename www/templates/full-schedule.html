@@ -1,4 +1,12 @@
 <ion-view view-title="Full schedule">
+    <ion-nav-buttons side="secondary">
+        <label class="toggle">
+            <input type="checkbox">
+            <div class="track">
+                <div class="handle"></div>
+            </div>
+        </label>
+    </ion-nav-buttons>
     <ion-content>
         <ion-refresher pulling-text="Pull to refresh..." on-refresh="loadData()"></ion-refresher>
         <ion-list can-swipe="true">

@@ -14,16 +14,21 @@
 .calendar table.month td.past-month {
     border-bottom: none;
 }
+.calendar .bar-subheader {
+    padding: 0px;
+    height: 21px;
+}
 .calendar table.header {
+    /*
     position: absolute;
-    top: 44px;
+    top: 44px;*/
     font-size: 0.7em;
 }
 .calendar table td {
     text-align: center;
 }
-.calendar .has-header {
-    top: 66px;
+.calendar .has-subheader {
+  top: 66px;
 }
 .calendar table.content td {
     padding: 4px 0px 8px 0px;
