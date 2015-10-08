@@ -2,4 +2,4 @@
 Client app for NetPlanning
 
 ## Update the ionic framework
-```npm -g ionic```
+```npm install -g ionic```
